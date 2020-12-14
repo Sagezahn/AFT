@@ -1,0 +1,19 @@
+diff a/Assets/Scripts/BuildManager.cs b/Assets/Scripts/BuildManager.cs	(rejected hunks)
+@@ -6,13 +6,12 @@
+ 
+ public class BuildManager : MonoBehaviour {
+ 
+-    public TurretData laserTurretData;
+-    public TurretData missileTurretData;
+-    public TurretData standardTurretData;
++    public TurretData MageData;
++    public TurretData ArcherData;
+ 
+-    //表示当前选择的炮台(要建造的炮台)
++    //Indicates the currently selected turret
+     private TurretData selectedTurretData;
+-    //表示当前选择的炮台(场景中的游戏物体)
++    //Indicates the currently selected turret
+     private MapCube selectedMapCube;
+ 
+     public Text moneyText;

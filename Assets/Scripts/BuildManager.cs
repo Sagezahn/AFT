@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour {
 
-    public TurretData MageData;
-    public TurretData ArcherData;
+    public TurretData laserTurretData;
+    public TurretData missileTurretData;
+    public TurretData standardTurretData;
 
-    //Indicates the currently selected turret
+    //表示当前选择的炮台(要建造的炮台)
     private TurretData selectedTurretData;
-    //Indicates the currently selected turret
+    //表示当前选择的炮台(场景中的游戏物体)
     private MapCube selectedMapCube;
 
     public Text moneyText;
@@ -97,7 +98,7 @@ public class BuildManager : MonoBehaviour {
     {
         if (isOn)
         {
-            selectedTurretData = MageData;
+            selectedTurretData = laserTurretData;
         }
     }
 
@@ -105,7 +106,14 @@ public class BuildManager : MonoBehaviour {
     {
         if (isOn)
         {
-            selectedTurretData = ArcherData;
+            selectedTurretData = missileTurretData;
+        }
+    }
+    public void OnStandardSelected(bool isOn)
+    {
+        if (isOn)
+        {
+            selectedTurretData = standardTurretData;
         }
     }
 

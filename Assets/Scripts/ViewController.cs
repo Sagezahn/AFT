@@ -25,7 +25,6 @@ public class ViewController : MonoBehaviour
     public float mouseSpeed = 60;
     void Start()
     {
-        Debug.Log(oldPosition1);
         Vector3 angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
@@ -102,30 +101,30 @@ public class ViewController : MonoBehaviour
         }
     }
 
-    void LateUpdate()
-        {
-#if (UNITY_ANDROID || UNITY_IOS) 
-            if (target)
-            {
+//     void LateUpdate()
+//         {
+// #if (UNITY_ANDROID || UNITY_IOS) 
+//             if (target)
+//             {
  
-                //Resetting the position of the camera
-                ClampAngle(y, yMinLimit, yMaxLimit);
-                Quaternion rotation = Quaternion.Euler(y, x, 0);
+//                 //Resetting the position of the camera
+//                 ClampAngle(y, yMinLimit, yMaxLimit);
+//                 Quaternion rotation = Quaternion.Euler(y, x, 0);
  
-                tmp.Set(0.0F,0.0F,(-1)*distance);
-                Vector3 position = rotation * tmp + target.transform.position;
+//                 tmp.Set(0.0F,0.0F,(-1)*distance);
+//                 Vector3 position = rotation * tmp + target.transform.position;
  
-                transform.rotation = rotation;
-                transform.position = position;
+//                 transform.rotation = rotation;
+//                 transform.position = position;
  
-            }
+//             }
         
-#endif
-#if UNITY_STANDALONE_WIN
-        transform.Translate(new Vector3(h * speed, mouse * mouseSpeed, v * speed) * Time.deltaTime, Space.World);
-#endif
+// #endif
+// #if UNITY_STANDALONE_WIN
+//         transform.Translate(new Vector3(h * speed, mouse * mouseSpeed, v * speed) * Time.deltaTime, Space.World);
+// #endif
 
-        }
+//         }
 
     
     static float ClampAngle(float angle, float min, float max)
