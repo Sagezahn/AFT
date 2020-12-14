@@ -5,20 +5,6 @@ using UnityEngine;
 public class Turret : MonoBehaviour {
 
     private List<GameObject> enemys = new List<GameObject>();
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.tag == "Enemy")
-        {
-            enemys.Add(col.gameObject);
-        }
-    }
-    void OnTriggerExit(Collider col)
-    {
-        if (col.tag == "Enemy")
-        {
-            enemys.Remove(col.gameObject);
-        }
-    }
 
     public float attackRateTime = 1; //多少秒攻击一次
     private float timer = 0;
@@ -37,7 +23,25 @@ public class Turret : MonoBehaviour {
 
     void Start()
     {
+        laserEffect.SetActive(false);
         timer = attackRateTime;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag == "Enemy")
+        {
+            enemys.Add(col.gameObject);
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        Debug.Log("Trigger Exit");
+        if (col.tag == "Enemy")
+        {
+            enemys.Remove(col.gameObject);
+        }
     }
 
     void Update()
@@ -61,6 +65,8 @@ public class Turret : MonoBehaviour {
         {
             if (laserRenderer.enabled == false)
                 laserRenderer.enabled = true;
+            
+            Debug.Log("true");
             laserEffect.SetActive(true);
             if (enemys[0] == null)
             {
@@ -78,6 +84,7 @@ public class Turret : MonoBehaviour {
         }
         else
         {
+            Debug.Log("false");
             laserEffect.SetActive(false);
             laserRenderer.enabled = false;
         }
