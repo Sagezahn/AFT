@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour {
                 GameObject.Instantiate(wave.enemyPrefab, START.position, Quaternion.identity);
                 CountEnemyAlive++;
                 if(i!=wave.count-1)
-                    yield return new WaitForSeconds(wave.rate);
+                    yield return new WaitForSeconds(wave.rate+0.5f);
             }
             while (CountEnemyAlive > 0)
             {

@@ -30,7 +30,7 @@ public class BuildManager : MonoBehaviour {
     void ChangeMoney(int change=0)
     {
         money += change;
-        moneyText.text = "￥" + money;
+        moneyText.text = "$" + money;
     }
 
     void Start()
@@ -44,7 +44,7 @@ public class BuildManager : MonoBehaviour {
         {
             if (EventSystem.current.IsPointerOverGameObject()==false)
             {
-                //开发炮台的建造
+                //Development of the construction of the fort
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 bool isCollider = Physics.Raycast(ray,out hit, 1000, LayerMask.GetMask("MapCube"));
@@ -53,7 +53,7 @@ public class BuildManager : MonoBehaviour {
                     MapCube mapCube = hit.collider.GetComponent<MapCube>();
                     if (selectedTurretData != null && mapCube.turretGo == null)
                     {
-                        //可以创建 
+                        //Can create 
                         if (money > selectedTurretData.cost)
                         {
                             ChangeMoney(-selectedTurretData.cost);
@@ -61,7 +61,7 @@ public class BuildManager : MonoBehaviour {
                         }
                         else
                         {
-                            //提示钱不够
+                            //Prompt not enough money
                             moneyAnimator.SetTrigger("Flicker");
                         }
                     }
