@@ -21,8 +21,12 @@ public class Turret : MonoBehaviour {
 
     public GameObject laserEffect;
 
+    private AudioSource explotion;
+
+
     void Start()
     {
+        explotion = this.GetComponent<AudioSource>();
         laserEffect.SetActive(false);
         timer = attackRateTime;
         string currentTurretName = gameObject.name;
@@ -128,6 +132,7 @@ public class Turret : MonoBehaviour {
         {
             GameObject bullet = GameObject.Instantiate(bulletPrefab, firePosition.position, firePosition.rotation);
             bullet.GetComponent<Bullet>().SetTarget(enemys[0].transform);
+            explotion.Play();
         }
         else
         {
