@@ -7,12 +7,13 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour {
 
     private NavMeshAgent agent ;
-    public float speed = 10;
+    public float speed = 3;
     public float hp = 150;
     private float totalHp;
     public GameObject explosionEffect;
     private Slider hpSlider;
-    private GameObject Destination;
+    private GameObject Destination;  
+    private Animator animator;
 
 
 	// Use this for initialization
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        animator = gameObject.GetComponent<Animator>();
         Move();
 	}
 
@@ -33,7 +35,8 @@ public class Enemy : MonoBehaviour {
     {
         agent.speed = speed;
         agent.SetDestination(Destination.transform.position);
-        if(transform.position ==Destination.transform.transform.position ){
+        animator.SetBool("Walking", true);
+        if(transform.position == Destination.transform.transform.position ){
             ReachDestination();
         }
     }
@@ -62,6 +65,7 @@ public class Enemy : MonoBehaviour {
     }
     void Die()
     {
+        animator.Play("Die");
         GameObject effect = GameObject.Instantiate(explosionEffect, transform.position, transform.rotation);
         Destroy(effect, 1.5f);
         Destroy(this.gameObject);
