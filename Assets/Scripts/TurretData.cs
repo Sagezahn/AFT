@@ -4,15 +4,17 @@ using UnityEngine;
 
 [System.Serializable]
 public class TurretData  {
-    public GameObject walker;
+    public GameObject L1;
     public int cost;
-    public GameObject Cavalry;
+    public GameObject L2;
+    public GameObject L3;
     public int costUpgraded;
     public TurretType type;
 }
 public enum TurretType
 {
-    Mage,
-    Archer,
+    primary,
+    middiem,
+    highest,
 
 }

@@ -25,6 +25,9 @@ public class Turret : MonoBehaviour {
     {
         laserEffect.SetActive(false);
         timer = attackRateTime;
+        string currentTurretName = gameObject.name;
+        damageRate = damageRate * currentTurret(currentTurretName);
+        attackRateTime = attackRateTime * currentTurret(currentTurretName);
     }
 
     void OnTriggerEnter(Collider col)
@@ -88,6 +91,31 @@ public class Turret : MonoBehaviour {
             laserEffect.SetActive(false);
             laserRenderer.enabled = false;
         }
+    }
+
+    // different level have different speed
+    private float currentLevel(string name) {
+        if (name.Contains("L1")) {
+            return 1f;
+        } else if (name.Contains("L2")) {
+            return 0.7f;
+        } else if (name.Contains("L3")) {
+            return 0.5f;
+        }
+        return 1f;
+    }
+
+    // different turret have different damage
+    private float currentTurret(string name) {
+
+        if (name.Contains("Primary")) {
+            return 1f;
+        } else if (name.Contains("Middiem")) {
+            return 1.3f;
+        } else if (name.Contains("Heighest")) {
+            return 1.5f;
+        }
+        return 1f;
     }
 
     void Attack()

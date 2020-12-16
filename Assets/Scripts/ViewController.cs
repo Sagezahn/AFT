@@ -33,7 +33,7 @@ public class ViewController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if (UNITY_ANDROID || UNITY_IOS) 
+        #if (UNITY_ANDROID || UNITY_IOS) 
         //Determine the number of touches as single point touch
         if(Input.touchCount == 1)
         {
@@ -78,13 +78,18 @@ public class ViewController : MonoBehaviour
                 
             }
         }
-#endif
+    #endif
 
-#if UNITY_STANDALONE_WIN
+    #if UNITY_STANDALONE_WIN
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         float mouse = Input.GetAxis("Mouse ScrollWheel");
-#endif
+        transform.Translate(new Vector3(h * speed, mouse * mouseSpeed, v * speed) * Time.deltaTime, Space.World);
+    #endif
+    
+            
+    
+
     }
     bool IsEnlarge(Vector2 oP1, Vector2 oP2, Vector2 nP1, Vector2 nP2)
     {
@@ -102,8 +107,8 @@ public class ViewController : MonoBehaviour
     }
 
     void LateUpdate()
-        {
-#if (UNITY_ANDROID || UNITY_IOS) 
+    {
+        #if (UNITY_ANDROID || UNITY_IOS) 
             if (target)
             {
  
@@ -119,12 +124,8 @@ public class ViewController : MonoBehaviour
  
             }
         
-#endif
-#if UNITY_STANDALONE_WIN
-        transform.Translate(new Vector3(h * speed, mouse * mouseSpeed, v * speed) * Time.deltaTime, Space.World);
-#endif
-
-        }
+        #endif
+    }
 
     
     static float ClampAngle(float angle, float min, float max)

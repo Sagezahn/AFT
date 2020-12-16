@@ -22,7 +22,7 @@ public class MapCube : MonoBehaviour {
     {
         this.turretData = turretData;
         isUpgraded = false;
-        turretGo = GameObject.Instantiate(turretData.walker, transform.position, Quaternion.identity);
+        turretGo = GameObject.Instantiate(turretData.L1, transform.position, Quaternion.identity);
         GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1.5f);
     }
@@ -30,10 +30,15 @@ public class MapCube : MonoBehaviour {
     public void UpgradeTurret()
     {
         if(isUpgraded==true)return;
-
+        string turretLevelName = turretGo.name;
         Destroy(turretGo);
-        isUpgraded = true;
-        turretGo = GameObject.Instantiate(turretData.walker, transform.position, Quaternion.identity);
+        if (turretLevelName.Contains("L1")) {
+            turretGo = GameObject.Instantiate(turretData.L2, transform.position, Quaternion.identity);
+        } else if (turretLevelName.Contains("L2")) {
+            turretGo = GameObject.Instantiate(turretData.L3, transform.position, Quaternion.identity);
+        } else {
+            isUpgraded = true;
+        }
         GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1.5f);
     }

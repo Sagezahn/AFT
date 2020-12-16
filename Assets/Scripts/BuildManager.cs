@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour {
 
-    public TurretData laserTurretData;
-    public TurretData missileTurretData;
-    public TurretData standardTurretData;
+    public TurretData PrimaryTurret;
+    public TurretData MiddiemTurret;
+    public TurretData HeighestTurret;
 
     //表示当前选择的炮台(要建造的炮台)
     private TurretData selectedTurretData;
@@ -30,7 +30,7 @@ public class BuildManager : MonoBehaviour {
     void ChangeMoney(int change=0)
     {
         money += change;
-        moneyText.text = "$" + money;
+        moneyText.text = "￥" + money;
     }
 
     void Start()
@@ -40,11 +40,11 @@ public class BuildManager : MonoBehaviour {
 
     void Update()
     {
-        if ( Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()==false)
             {
-                //Development of the construction of the fort
+                //开发炮台的建造
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 bool isCollider = Physics.Raycast(ray,out hit, 1000, LayerMask.GetMask("MapCube"));
@@ -53,7 +53,7 @@ public class BuildManager : MonoBehaviour {
                     MapCube mapCube = hit.collider.GetComponent<MapCube>();
                     if (selectedTurretData != null && mapCube.turretGo == null)
                     {
-                        //Can create 
+                        //可以创建 
                         if (money > selectedTurretData.cost)
                         {
                             ChangeMoney(-selectedTurretData.cost);
@@ -61,7 +61,7 @@ public class BuildManager : MonoBehaviour {
                         }
                         else
                         {
-                            //Prompt not enough money
+                            //提示钱不够
                             moneyAnimator.SetTrigger("Flicker");
                         }
                     }
@@ -78,7 +78,7 @@ public class BuildManager : MonoBehaviour {
                         //{
                         //    ShowUpgradeUI(mapCube.transform.position, false);
                         //}
-                        if (mapCube == selectedMapCube && upgradeCanvas.activeInHierarchy)
+                        if (mapCube  == selectedMapCube && upgradeCanvas.activeInHierarchy)
                         {
                             StartCoroutine(HideUpgradeUI());
                         }
@@ -98,7 +98,7 @@ public class BuildManager : MonoBehaviour {
     {
         if (isOn)
         {
-            selectedTurretData = laserTurretData;
+            selectedTurretData = PrimaryTurret;
         }
     }
 
@@ -106,14 +106,14 @@ public class BuildManager : MonoBehaviour {
     {
         if (isOn)
         {
-            selectedTurretData = missileTurretData;
+            selectedTurretData = MiddiemTurret;
         }
     }
     public void OnStandardSelected(bool isOn)
     {
         if (isOn)
         {
-            selectedTurretData = standardTurretData;
+            selectedTurretData = HeighestTurret;
         }
     }
 
