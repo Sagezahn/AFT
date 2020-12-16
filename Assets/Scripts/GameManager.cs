@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,9 +29,13 @@ public class GameManager : MonoBehaviour {
         endMessage.text = "Defalt";
     }
 
+    public void OnButtonNext()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
     public void OnButtonRetry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex );
+        SceneManager.LoadScene(1);
     }
     public void OnButtonMenu()
     {

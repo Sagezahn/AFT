@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
 
     private NavMeshAgent agent ;
     public float speed = 3;
-    public float hp = 150;
+    public float hp = 300;
     private float totalHp;
     public GameObject explosionEffect;
     private Slider hpSlider;
