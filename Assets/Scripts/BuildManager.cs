@@ -19,18 +19,19 @@ public class BuildManager : MonoBehaviour {
 
     public Animator moneyAnimator;
 
-    private int money = 1000;
+    private int money = 200;
 
     public GameObject upgradeCanvas;
 
     private Animator upgradeCanvasAnimator;
 
     public Button buttonUpgrade;
+    float time;
 
     void ChangeMoney(int change=0)
     {
         money += change;
-        moneyText.text = "￥" + money;
+        moneyText.text = "$" + money;
     }
 
     void Start()
@@ -40,6 +41,12 @@ public class BuildManager : MonoBehaviour {
 
     void Update()
     {
+
+        time += Time.deltaTime;
+        if(time >1.0){                  
+            ChangeMoney(1);
+            time = 0f;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()==false)

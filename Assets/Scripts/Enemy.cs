@@ -8,9 +8,11 @@ public class Enemy : MonoBehaviour {
 
     private NavMeshAgent agent ;
     public float speed = 3;
-    public float hp = 150;
+    public float hp = 300;
     private float totalHp;
     public GameObject explosionEffect;
+    private AudioSource death;
+
     private Slider hpSlider;
     private GameObject Destination;  
     private Animator animator;
@@ -18,6 +20,8 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        death = this.GetComponent<AudioSource>();
+
         totalHp = hp;
         hpSlider = GetComponentInChildren<Slider>();
         agent = GetComponent<NavMeshAgent>();
@@ -50,6 +54,7 @@ public class Enemy : MonoBehaviour {
 
     void OnDestroy()
     {
+        death.Play(); 
         EnemySpawner.CountEnemyAlive--;
     }
 
